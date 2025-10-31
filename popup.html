@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動截圖工具</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    
+    h2 {
+      margin: 0 0 15px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    
+    .status {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    
+    .status.active {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status.inactive {
+      background: #f8f9fa;
+      color: #6c757d;
+      border: 1px solid #dee2e6;
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: background 0.2s;
+    }
+    
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+    
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    
+    .settings {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #495057;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 13px;
+      box-sizing: border-box;
+    }
+    
+    textarea {
+      resize: vertical;
+      font-family: monospace;
+    }
+    
+    .help-text {
+      font-size: 11px;
+      color: #6c757d;
+      margin-top: 3px;
+    }
+    
+    .shortcut {
+      background: #e9ecef;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📸 自動截圖工具</h2>
+  
+  <div id="status" class="status inactive">
+    ⏸️ 未啟動 (已截取: 0 張)
+  </div>
+  
+  <button id="toggleBtn" class="btn-primary">開始截圖</button>
+  
+  <div class="shortcut">
+    快捷鍵: <strong>Alt + Shift + S</strong>
+  </div>
+  
+  <div class="settings">
+    <h3 style="font-size: 14px; margin: 0 0 10px 0;">⚙️ 設定</h3>
+    
+    <div class="form-group">
+      <label>儲存資料夾名稱：</label>
+      <input type="text" id="saveFolder" placeholder="screenshots">
+      <div class="help-text">截圖將儲存在下載資料夾的此子資料夾中</div>
+    </div>
+    
+    <div class="form-group">
+      <label>下一頁按鈕選擇器：</label>
+      <textarea id="nextButtonSelector" rows="3">a:contains("下一頁"), button:contains("下一頁"), a[rel="next"], .next</textarea>
+      <div class="help-text">多個選擇器用逗號分隔，支援 CSS 選擇器</div>
+    </div>
+    
+    <div class="form-group">
+      <label>翻頁後等待時間 (毫秒)：</label>
+      <input type="number" id="delayMs" placeholder="2000" min="500" max="10000">
+      <div class="help-text">點擊下一頁後等待頁面載入的時間</div>
+    </div>
+    
+    <button id="saveSettings" class="btn-primary">儲存設定</button>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
