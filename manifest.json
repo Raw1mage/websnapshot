@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "自動截圖翻頁工具",
+  "version": "1.0",
+  "description": "按熱鍵自動截圖並翻頁，直到再次按鍵停止",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "自動截圖工具"
+  },
+  "commands": {
+    "toggle-capture": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "開始/停止自動截圖"
+    }
+  }
+}
